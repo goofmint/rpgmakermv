@@ -157,8 +157,14 @@ if (!Imported.TMEventBase) {
 
   Game_CharacterBase.prototype.setNamePop = function(namePop, shiftY) {
     if (namePop) {
-      namePop = Window_Base.prototype.convertEscapeCharacters.call(
-                new Window_Base(0, 0, 0, 0), namePop);
+      if (Utils.RPGMAKER_NAME === 'MZ') {
+        namePop = Window_Base.prototype.convertEscapeCharacters.call(
+          new Window_Base(new Rectangle(0, 0, 0, 0)), namePop);
+      } else {
+        // For MV
+        namePop = Window_Base.prototype.convertEscapeCharacters.call(
+          new Window_Base(0, 0, 0, 0), namePop);
+      }
     }
     this._namePop = namePop;
     this._namePopY = shiftY;
